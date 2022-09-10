@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Cardcomponent from './Cardcomponent'
+import Cardcomponent from './component/Cardcomponent'
 
 export default function Functional_component() {
   const [posts, setPosts] = useState([])
