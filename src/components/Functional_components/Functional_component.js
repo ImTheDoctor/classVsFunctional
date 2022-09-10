@@ -1,39 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Cardcomponent from './Cardcomponent'
 
 export default function Functional_component() {
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(data => setPosts(data))
+  }, [])
+
   return (
-    <div>Functional_component</div>
+    <div className="container">
+      <Link to="/" class="btn btn-primary">Home</Link>
+      <h1 className="text-center m-5">Functional Component</h1>
+      <div className="container d-flex flex-wrap" style={{ gap: '20px' }}>
+        {posts.map((post, idx) =>
+          <Cardcomponent key={idx} post={post} posts={posts} setPosts={setPosts} id={idx} />
+        )}
+      </div>
+    </div>
   )
 }
-
-// import React, { Component } from "react";
-
-// export default class Class_component extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.state =  {posts: []} 
-//     }
-
-//     componentDidMount() {
-//         fetch('https://jsonplaceholder.typicode.com/todos/posts')
-//             .then(response => response.json())
-//             .then(response => this.setState({ posts: response }))
-//     }
-//     render() {
-//         return (
-//             <div className="container">
-//                 <div className="row">
-//                     <div className="col-12">
-//                         {this.state.posts}
-//                         {/* {this.state.posts.map(post => 
-//                         <div>
-//                             <h2>{post.title}</h2>
-//                             <div>{post.body}</div>
-//                         </div>)} */}
-//                     </div>
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
-
